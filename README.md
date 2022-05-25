@@ -1,4 +1,4 @@
-# Covid Tracker
+# TravelAdvisory
 Revature Training: Project2
 
 API 1:
