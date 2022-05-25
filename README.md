@@ -1,5 +1,5 @@
-# Project_2_Team_3
-Covid Tracker
+# Covid Tracker
+Revature Training: Project2
 
 API 1:
   Output location status:
