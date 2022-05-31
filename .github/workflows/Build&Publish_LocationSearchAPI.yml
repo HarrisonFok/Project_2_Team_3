@@ -13,7 +13,7 @@ jobs:
     - name: Publish to Registry
       uses: elgohr/Publish-Docker-Github-Action@v4
       with:
-        name: alahkaih/location-search-api
+        name: harrisonfok/location-search-api
         dockerfile: Project_2/LocationSearchAPI/Dockerfile
         build-args: JAR_FILE=buildpath/LocationSearchAPI.jar
         snapshot: true
