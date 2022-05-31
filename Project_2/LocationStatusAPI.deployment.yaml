@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: location-status-api
-          image: alahkaih/location-status-api:latest
+          image: harrisonfok/location-status-api:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8000
