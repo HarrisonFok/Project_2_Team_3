@@ -30,7 +30,7 @@ jobs:
       - name: Publish to Registry (Status)
         uses: elgohr/Publish-Docker-Github-Action@v4
         with:
-          name: alahkaih/location-status-api
+          name: harrisonfok/location-status-api
           dockerfile: Project_2/LocationStatusAPI/Dockerfile
           buildargs: JAR_FILE=Project_2/staging/LocationStatusAPI.jar
           snapshot: true
@@ -39,7 +39,7 @@ jobs:
       - name: Publish to Registry (Search)
         uses: elgohr/Publish-Docker-Github-Action@v4
         with:
-          name: alahkaih/location-search-api
+          name: harrisonfok/location-search-api
           dockerfile: Project_2/LocationSearchAPI/Dockerfile
           buildargs: JAR_FILE=Project_2/staging/LocationSearchAPI.jar
           snapshot: true
