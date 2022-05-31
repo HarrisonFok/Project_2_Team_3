@@ -13,7 +13,7 @@ jobs:
     - name: Publish to Registry
       uses: elgohr/Publish-Docker-Github-Action@v4
       with:
-        name: alahkaih/location-status-api
+        name: harrisonfok/location-status-api
         dockerfile: Project_2/LocationStatusAPI/Dockerfile
         snapshot: true
         username: ${{ secrets.DOCKER_USERNAME }}
