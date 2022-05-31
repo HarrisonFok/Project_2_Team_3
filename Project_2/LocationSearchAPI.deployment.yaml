@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: location-search-api
-          image: alahkaih/location-search-api:latest
+          image: harrisonfok/location-search-api:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 7000
