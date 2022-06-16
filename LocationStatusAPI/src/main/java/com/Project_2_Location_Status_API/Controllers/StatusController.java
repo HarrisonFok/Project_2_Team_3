@@ -43,7 +43,7 @@ public class StatusController {
      * @param country
      * @return statusReport
      */
-    @GetMapping("{country}")
+    @GetMapping("/{country}")
     public ResponseEntity getStatusBasedOnLocation(@PathVariable String country) {
 
         StatusReport statusReport = new StatusReport();
