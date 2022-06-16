@@ -1,4 +1,4 @@
-package src.main.java.com.Project_2_Location_Search_API;
+package com.Project_2_Location_Search_API;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

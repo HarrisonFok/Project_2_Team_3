@@ -12,8 +12,8 @@ management:
 spring:
   datasource:
     username: root
-    password: Ccc12345!!!
-    url: jdbc:mysql://34.130.53.121:3306/covidTrackerDB
+    password: root
+    url: jdbc:mysql://34.135.174.142:3306/covid-tracker-db
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     database: mysql

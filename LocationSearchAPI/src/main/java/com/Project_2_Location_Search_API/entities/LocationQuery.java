@@ -15,8 +15,8 @@ import javax.persistence.*;
 public class LocationQuery {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id", columnDefinition = "AUTO_INCREMENT")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @Column(name="id", columnDefinition = "AUTO_INCREMENT")
     private int queryID;
 
     @Column(name = "location_name")

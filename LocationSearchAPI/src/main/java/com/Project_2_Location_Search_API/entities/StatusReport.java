@@ -15,8 +15,8 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class StatusReport {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id", columnDefinition = "AUTO_INCREMENT")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @Column(name="id", columnDefinition = "AUTO_INCREMENT")
     private int id;
 
     @Column(name = "score")
