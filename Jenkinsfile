@@ -29,6 +29,7 @@ pipeline {
         steps {
             withMaven {
                 sh 'cd LocationSearchAPI && mvn package -DskipTests'
+                sh 'cd LocationStatusAPI && mvn package -DskipTests'
             }
         }
     }
