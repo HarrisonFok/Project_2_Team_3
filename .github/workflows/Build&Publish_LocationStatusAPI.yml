@@ -1,0 +1,20 @@
+name: Publish LocationStatusAPI
+on: 
+  push: 
+    branches: [ main ]
+    
+  workflow_dispatch:
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Publish to Registry
+      uses: elgohr/Publish-Docker-Github-Action@v4
+      with:
+        name: harrisonfok/location-status-api
+        dockerfile: Project_2/LocationStatusAPI/Dockerfile
+        snapshot: true
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
