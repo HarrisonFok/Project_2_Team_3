@@ -77,6 +77,12 @@ pipeline {
         }
     }
 
+    stage("Cealnup") {
+        steps {
+            sh "docker rmi $registry1:$currentBuild.number LocationSearchAPI"
+        }
+    }
+
     stage('Wait for approval') {
         when {
             anyOf {branch 'master'}
