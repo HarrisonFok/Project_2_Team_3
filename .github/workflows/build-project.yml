@@ -1,0 +1,49 @@
+name: Java CI
+
+on: 
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./Project_2
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK 8
+        uses: actions/setup-java@v3
+        with:
+          java-version: '8'
+          distribution: 'adopt'
+      - name: Build with Maven
+        run: mvn --batch-mode --update-snapshots package
+      - run: mkdir staging
+      - run: cp LocationSearchAPI/target/*.jar staging
+      - run: cp LocationStatusAPI/target/*.jar staging
+      #- uses: actions/upload-artifact@v3
+       # with:
+        # name: Package
+         #path: Project_2/staging
+      - name: Publish to Registry (Status)
+        uses: elgohr/Publish-Docker-Github-Action@v4
+        with:
+          name: harrisonfok/location-status-api
+          dockerfile: Project_2/LocationStatusAPI/Dockerfile
+          buildargs: JAR_FILE=Project_2/staging/LocationStatusAPI.jar
+          snapshot: true
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Publish to Registry (Search)
+        uses: elgohr/Publish-Docker-Github-Action@v4
+        with:
+          name: harrisonfok/location-search-api
+          dockerfile: Project_2/LocationSearchAPI/Dockerfile
+          buildargs: JAR_FILE=Project_2/staging/LocationSearchAPI.jar
+          snapshot: true
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      
+
