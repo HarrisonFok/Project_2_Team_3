@@ -54,6 +54,7 @@ pipeline {
                 echo "$registry1:$currentBuild.number"
                 //echo "$registry2:$currentBuild.number"
                 sh "docker build -t $registry1 LocationSearchAPI"
+                sh "docker build -t $registry2 LocationStatusAPI"
             }
         }
     }
@@ -66,6 +67,7 @@ pipeline {
             script {
                 docker.withRegistry("", dockerHubCreds) {
                     sh "docker push harrisonfok/covid_tracker_location_search_api"
+                    sh "docker push harrisonfok/covid_tracker_location_status_api"
                 }
             }
             echo "Docker Deliver"
