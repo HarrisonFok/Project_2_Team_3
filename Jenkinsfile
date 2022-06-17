@@ -64,7 +64,9 @@ pipeline {
         }
         steps {
             script {
-                sh "docker push harrisonfok/covid_tracker_location_search_api"
+                docker.withRegistry("", dockerHubCreds) {
+                    sh "docker push harrisonfok/covid_tracker_location_search_api"
+                }
             }
             echo "Docker Deliver"
         }
