@@ -67,7 +67,7 @@ pipeline {
             script {
                 docker.withRegistry("", dockerHubCreds) {
                     dockerImage1.push("$currentBuild.number")
-                    dockerImage2.push("$currentBuild.number")
+                    //dockerImage2.push("$currentBuild.number")
                 }
             }
         }
