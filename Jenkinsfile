@@ -7,20 +7,21 @@ pipeline {
         }
     }
 
-    stage('Unit Testing') {
-        // When we merge to main, this will be skipped
-        when {
-            // It's the branch/es you're pushing to
-            anyOf { branch 'ft_*'; branch 'bg_*'}
-        }
-        steps {
-            // syntax of the plugin
-            withMaven {
-                sh 'cd LocationSearchAPI && mvn test'
-            }
-            junit skipPublishingChecks: true, testResults: 'target/surefire-reports/*.xml'
-        }
-    }
+//     stage('Unit Testing') {
+//         // When we merge to main, this will be skipped
+//         when {
+//             // It's the branch/es you're pushing to
+//             anyOf { branch 'ft_*'; branch 'bg_*'}
+//         }
+//         steps {
+//             // syntax of the plugin
+//             withMaven {
+//                 sh 'cd LocationSearchAPI && mvn test'
+//             }
+//             junit skipPublishingChecks: true, testResults: 'target/surefire-reports/*.xml'
+//         }
+//     }
+
     stage('Build') {
         steps {
             echo "Build"
