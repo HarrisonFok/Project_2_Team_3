@@ -16,8 +16,9 @@ pipeline {
         steps {
             // syntax of the plugin
             withMaven {
-                sh 'mvn test'
+                sh 'cd LocationSearchAPI && mvn test'
             }
+            junit skipPublishingChecks: true, testResults: 'target/surefire-reports/*.xml'
         }
     }
     stage('Build') {
