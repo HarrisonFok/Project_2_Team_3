@@ -53,7 +53,7 @@ pipeline {
                 echo "$registry1:$currentBuild.number"
 //                 sh "cd LocationSearchAPI && docker.build "$registry1""
 //                 dockerImage1 = docker.build "$registry1" "LocationStatusAPI"
-                sh "docker build -t "$registry1" LocationStatusAPI"
+                sh "docker build -t $registry1 LocationStatusAPI"
             }
         }
     }
