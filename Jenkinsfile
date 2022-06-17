@@ -53,9 +53,9 @@ pipeline {
             script {
                 echo "$registry1:$currentBuild.number"
                 echo "$registry2:$currentBuild.number"
-                sh "docker build -t $registry1 LocationSearchAPI"
-                sh "docker build -t $registry2 LocationStatusAPI"
-//                 dockerImage1 = docker.build "$registry1:$currentBuild.number LocationSearchAPI"
+//                 sh "docker build -t $registry1 LocationSearchAPI"
+//                 sh "docker build -t $registry2 LocationStatusAPI"
+                dockerImage1 = docker.build "$registry1:$currentBuild.number LocationSearchAPI"
 //                 dockerImage2 = docker.build "$registry2:$currentBuild.number LocationStatusAPI"
             }
         }
@@ -66,12 +66,12 @@ pipeline {
             branch 'master'
         }
         steps {
-//             script {
-//                 docker.withRegistry("", dockerHubCreds) {
-//                     dockerImage1.push("$currentBuild.number")
+            script {
+                docker.withRegistry("", dockerHubCreds) {
+                    dockerImage1.push("$currentBuild.number")
 //                     dockerImage2.push("$currentBuild.number")
-//                 }
-//             }
+                }
+            }
             echo "Docker Deliver"
         }
     }
@@ -82,19 +82,19 @@ pipeline {
         }
         steps {
             script {
-            try {
-                timeout(time: 20, unit: 'MINUTES') {
-                    approved = input message: 'Deploy to production?', ok: 'Continue',
-                        parameters: [choice(name: 'approved', choices: 'Yes\nNo', description: 'Deploy build to production')]
+                try {
+                    timeout(time: 20, unit: 'MINUTES') {
+                        approved = input message: 'Deploy to production?', ok: 'Continue',
+                            parameters: [choice(name: 'approved', choices: 'Yes\nNo', description: 'Deploy build to production')]
 
-                    if(approved != 'Yes') {
-                        error('Build did not pass approval')
+                        if(approved != 'Yes') {
+                            error('Build did not pass approval')
+                        }
                     }
+                } catch(error) {
+                    error('Build failed because timeout was exceeded');
                 }
-            } catch(error) {
-                error('Build failed because timeout was exceeded');
             }
-        }
         }
     }
 
