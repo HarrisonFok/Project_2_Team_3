@@ -52,12 +52,8 @@ pipeline {
         steps {
             script {
                 echo "$registry1:$currentBuild.number"
-                echo "$registry2:$currentBuild.number"
-//                 sh "docker build -t $registry1 LocationSearchAPI"
-//                 sh "docker build -t $registry2 LocationStatusAPI"
-//                     dockerImage1 = docker.build "$registry1:$currentBuild.number"
+                //echo "$registry2:$currentBuild.number"
                 sh "docker build -t $registry1 LocationSearchAPI"
-//                 dockerImage2 = docker.build "$registry2:$currentBuild.number LocationStatusAPI"
             }
         }
     }
@@ -68,12 +64,12 @@ pipeline {
         }
         steps {
             script {
-                docker.withRegistry("", dockerHubCreds) {
-                    dockerImage1.push("$currentBuild.number")
-                    dockerImage1.push("latest")
-
-//                     dockerImage2.push("$currentBuild.number")
-                }
+                sh "docker push harrisonfok/covid_tracker_location_search_api"
+//                 docker.withRegistry("", dockerHubCreds) {
+//                     dockerImage1.push("$currentBuild.number")
+//                     dockerImage1.push("latest")
+// //                     dockerImage2.push("$currentBuild.number")
+//                 }
             }
             echo "Docker Deliver"
         }
