@@ -9,9 +9,11 @@ pipeline {
   agent any
   stages {
 
-    stage('Quality Gate') {
+    stage('SonarCloud') {
         steps {
-            echo "Quality Gate"
+            withSonarQubeEnv("SonarCloud") {
+                sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=${PROJECT_KEY} -Dsonar.organization=${ORGANIZATION}"
+            }
         }
     }
 
