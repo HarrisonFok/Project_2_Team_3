@@ -4,6 +4,7 @@ pipeline {
     registry2 = "harrisonfok/covid_tracker_location_status_api"
     dockerHubCreds = "docker_hub"
     dockerImage1 = ""
+    dockerImage2 = ""
   }
   agent any
   stages {
@@ -52,15 +53,23 @@ pipeline {
             script {
                 echo "$registry1:$currentBuild.number"
                 echo "$registry2:$currentBuild.number"
-                sh "docker build -t $registry1 LocationSearchAPI"
-                sh "docker build -t $registry2 LocationStatusAPI"
+                dockerImage1 = sh "docker build -t $registry1 LocationSearchAPI"
+                dockerImage2 = sh "docker build -t $registry2 LocationStatusAPI"
             }
         }
     }
 
     stage('Docker Deliver') {
+        when {
+            branch 'master'
+        }
         steps {
-            echo "Docker Deliver"
+            script {
+                docker.withRegistry("", dockerHubCreds) {
+                    dockerImage1.push("LocationSearch: $currentBuild.number")
+                    dockerImage2.push("LocationStatus: $currentBuild.number")
+                }
+            }
         }
     }
 
