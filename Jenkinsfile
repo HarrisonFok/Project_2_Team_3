@@ -65,11 +65,6 @@ pipeline {
         steps {
             script {
                 sh "docker push harrisonfok/covid_tracker_location_search_api"
-//                 docker.withRegistry("", dockerHubCreds) {
-//                     dockerImage1.push("$currentBuild.number")
-//                     dockerImage1.push("latest")
-// //                     dockerImage2.push("$currentBuild.number")
-//                 }
             }
             echo "Docker Deliver"
         }
