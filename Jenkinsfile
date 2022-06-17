@@ -53,8 +53,8 @@ pipeline {
             script {
                 echo "$registry1:$currentBuild.number"
                 echo "$registry2:$currentBuild.number"
-                dockerImage1 = docker.build "$registry1 LocationSearchAPI"
-                //dockerImage2 = docker.build "$registry2 LocationStatusAPI"
+                sh "docker build -t $registry1 LocationSearchAPI"
+                sh "docker build -t $registry2 LocationStatusAPI"
             }
         }
     }
@@ -67,7 +67,7 @@ pipeline {
             script {
                 docker.withRegistry("", dockerHubCreds) {
                     dockerImage1.push("$currentBuild.number")
-                    //dockerImage2.push("$currentBuild.number")
+                    dockerImage2.push("$currentBuild.number")
                 }
             }
         }
