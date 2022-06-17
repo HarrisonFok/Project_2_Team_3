@@ -2,7 +2,9 @@ pipeline {
   agent any
   stages {
     stage('Quality Gate') {
-        steps {}
+        steps {
+            echo "Quality Gate"
+        }
     }
     stage('Unit Testing') {
         // When we merge to main, this will be skipped
@@ -18,19 +20,29 @@ pipeline {
         }
     }
     stage('Build') {
-        steps {}
+        steps {
+            echo "Build"
+        }
     }
     stage('Docker Image') {
-        steps {}
+        steps {
+            echo "Docker Image"
+        }
     }
     stage('Docker Deliver') {
-        steps {}
+        steps {
+            echo "Docker Deliver"
+        }
     }
     stage('Wait for approval') {
-        steps {}
+        steps {
+            echo "Wait for approval"
+        }
     }
     stage('Deploy') {
-        steps {}
+        steps {
+            echo "Deploy"
+        }
     }
   }
 }
