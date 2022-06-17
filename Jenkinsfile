@@ -66,8 +66,8 @@ pipeline {
         steps {
             script {
                 docker.withRegistry("", dockerHubCreds) {
-                    dockerImage1.push("LocationSearch: $currentBuild.number")
-                    dockerImage2.push("LocationStatus: $currentBuild.number")
+                    dockerImage1.push("$currentBuild.number")
+                    dockerImage2.push("$currentBuild.number")
                 }
             }
         }
