@@ -69,6 +69,7 @@ pipeline {
             script {
                 docker.withRegistry("", dockerHubCreds) {
                     dockerImage1.push("$currentBuild.number")
+                    dockerImage1.push("latest")
 //                     dockerImage2.push("$currentBuild.number")
                 }
             }
