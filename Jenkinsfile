@@ -2,7 +2,8 @@ pipeline {
   environment {
     registry = "harrisonfok/covid_tracker"
     dockerHubCreds = "docker_hub"
-    dockerImage = ""
+    dockerImage1 = ""
+    dockerImage2 = ""
   }
   agent any
   stages {
@@ -50,7 +51,7 @@ pipeline {
         steps {
             script {
                 echo "$registry:$currentBuild.number"
-                dockerImage = docker.build "$registry"
+                dockerImage1 = sh "cd LocationSearchAPI && docker.build "$registry""
             }
         }
     }
