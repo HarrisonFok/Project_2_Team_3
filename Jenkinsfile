@@ -55,10 +55,8 @@ pipeline {
                 echo "$registry2:$currentBuild.number"
 //                 sh "docker build -t $registry1 LocationSearchAPI"
 //                 sh "docker build -t $registry2 LocationStatusAPI"
-                dir('/LocationSearchAPI') {
 //                     dockerImage1 = docker.build "$registry1:$currentBuild.number"
-                    sh "docker build -t $registry1 ."
-                }
+                sh "docker build -t $registry1 LocationSearchAPI"
 //                 dockerImage2 = docker.build "$registry2:$currentBuild.number LocationStatusAPI"
             }
         }
