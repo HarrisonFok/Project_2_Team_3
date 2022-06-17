@@ -23,8 +23,13 @@ pipeline {
 //     }
 
     stage('Build') {
+        when {
+            branch 'master'
+        }
         steps {
-            echo "Build"
+            withMaven {
+                sh 'cd LocationSearchAPI && mvn package -DskipTests'
+            }
         }
     }
     stage('Docker Image') {
