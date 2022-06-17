@@ -53,8 +53,10 @@ pipeline {
             script {
                 echo "$registry1:$currentBuild.number"
                 echo "$registry2:$currentBuild.number"
-                sh "docker build -t $registry1 LocationSearchAPI"
-                sh "docker build -t $registry2 LocationStatusAPI"
+//                 sh "docker build -t $registry1 LocationSearchAPI"
+//                 sh "docker build -t $registry2 LocationStatusAPI"
+                dockerImage1 = docker.build "$registry1:$currentBuild.number LocationSearchAPI"
+                dockerImage2 = docker.build "$registry2:$currentBuild.number LocationStatusAPI"
             }
         }
     }
@@ -74,8 +76,24 @@ pipeline {
     }
 
     stage('Wait for approval') {
+        when {
+            anyOf {branch 'master'}
+        }
         steps {
-            echo "Wait for approval"
+            script {
+            try {
+                timeout(time: 20, unit: 'MINUTES') {
+                    approved = input message: 'Deploy to production?', ok: 'Continue',
+                        parameters: [choice(name: 'approved', choices: 'Yes\nNo', description: 'Deploy build to production')]
+
+                    if(approved != 'Yes') {
+                        error('Build did not pass approval')
+                    }
+                }
+            } catch(error) {
+                error('Build failed because timeout was exceeded');
+            }
+        }
         }
     }
 
