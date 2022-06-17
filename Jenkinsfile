@@ -6,6 +6,7 @@ pipeline {
             echo "Quality Gate"
         }
     }
+
     stage('Unit Testing') {
         // When we merge to main, this will be skipped
         when {
@@ -18,7 +19,6 @@ pipeline {
                 sh 'mvn test'
             }
         }
-
     }
     stage('Build') {
         steps {
