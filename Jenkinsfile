@@ -5,6 +5,7 @@ pipeline {
     dockerHubCreds = "docker_hub"
     dockerImage1 = ""
     dockerImage2 = ""
+    scannerHome = tool 'SonarQubeScanner'
   }
   agent any
   stages {
