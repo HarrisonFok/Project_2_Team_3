@@ -54,7 +54,7 @@ pipeline {
         steps {
             script {
                 echo "$registry1:$currentBuild.number"
-                //echo "$registry2:$currentBuild.number"
+                echo "$registry2:$currentBuild.number"
                 sh "docker build -t $registry1 LocationSearchAPI"
                 sh "docker build -t $registry2 LocationStatusAPI"
             }
@@ -97,6 +97,7 @@ pipeline {
             }
         }
     }
+
 
     stage('Deploy') {
         steps {
