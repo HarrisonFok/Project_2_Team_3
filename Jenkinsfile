@@ -12,8 +12,10 @@ pipeline {
 
     stage('SonarCloud') {
         steps {
-            withSonarQubeEnv("SonarCloud") {
-                sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=${PROJECT_KEY} -Dsonar.organization=${ORGANIZATION}"
+            withSonarQubeEnv('SonarCloud') {
+                sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar \
+                    -Dsonar.organization=$ORGANIZATION \
+                    -Dsonar.java.binaries=LocationStatusAPI/target'
             }
         }
     }
