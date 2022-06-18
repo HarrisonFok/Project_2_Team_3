@@ -5,15 +5,19 @@ pipeline {
     dockerHubCreds = "docker_hub"
     dockerImage1 = ""
     dockerImage2 = ""
+    scannerHome = tool 'SonarQubeScanner'
   }
   agent any
   stages {
 
     stage('SonarCloud') {
         steps {
-            withSonarQubeEnv("SonarCloud") {
-                sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=${PROJECT_KEY} -Dsonar.organization=${ORGANIZATION}"
-            }
+//             withSonarQubeEnv('SonarCloud') {
+//                 sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar \
+//                     -Dsonar.organization=$ORGANIZATION \
+//                     -Dsonar.java.binaries=TravelAdvisory/LocationSearchAPI/target'
+//             }
+            echo "SonarCloud"
         }
     }
 
@@ -102,6 +106,7 @@ pipeline {
     stage('Deploy') {
         steps {
             echo "Deploy"
+            echo "GKE"
         }
     }
   }
