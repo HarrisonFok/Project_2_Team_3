@@ -6,6 +6,7 @@ pipeline {
     dockerImage1 = ""
     dockerImage2 = ""
     scannerHome = tool 'SonarQubeScanner'
+
   }
   agent any
   stages {
@@ -104,7 +105,7 @@ pipeline {
 
     stage('Deploy') {
         steps {
-            sh "sed -i 's|image: harrisonfok/covid_tracker_location_search_api|image: ${REGISTRY_LOCATION}-docker.pkg.dev/${PROJECT_ID}/${REPOSITORY}/harrisonfok/covid_tracker_location_search_api|g' Kubernetes/LocationStatusAPI.deployment.yaml"
+            sh "sed -i 's|image: harrisonfok/covid_tracker_location_search_api|image: harrisonfok/covid_tracker_location_search_api|g' Kubernetes/LocationStatusAPI.deployment.yaml"
             step([$class: 'KubernetesEngineBuilder',
                 projectId: env.PROJECT_ID,
                 clusterName: env.CLUSTER_NAME,
@@ -113,7 +114,7 @@ pipeline {
                 credentialsId: env.CREDENTIALS_ID,
                 verifyDeployments: true])
 
-            sh "sed -i 's|image: harrisonfok/covid_tracker_location_status_api|image: ${REGISTRY_LOCATION}-docker.pkg.dev/${PROJECT_ID}/${REPOSITORY}/harrisonfok/covid_tracker_location_status_api|g' Kubernetes/LocationSearchAPI.deployment.yaml"
+            sh "sed -i 's|image: harrisonfok/covid_tracker_location_status_api|image: harrisonfok/covid_tracker_location_status_api|g' Kubernetes/LocationSearchAPI.deployment.yaml"
             step([$class: 'KubernetesEngineBuilder',
                 projectId: env.PROJECT_ID,
                 clusterName: env.CLUSTER_NAME,
