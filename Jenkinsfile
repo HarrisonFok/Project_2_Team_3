@@ -6,18 +6,18 @@ pipeline {
     dockerImage1 = ""
     dockerImage2 = ""
     scannerHome = tool 'SonarQubeScanner'
+
   }
   agent any
   stages {
 
     stage('SonarCloud') {
         steps {
-//             withSonarQubeEnv('SonarCloud') {
-//                 sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar \
-//                     -Dsonar.organization=$ORGANIZATION \
-//                     -Dsonar.java.binaries=TravelAdvisory/LocationSearchAPI/target'
-//             }
-            echo "SonarCloud"
+            withSonarQubeEnv('SonarCloud') {
+                sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar \
+                    -Dsonar.organization=$ORGANIZATION \
+                    -Dsonar.java.binaries=target'
+            }
         }
     }
 
@@ -105,8 +105,15 @@ pipeline {
 
     stage('Deploy') {
         steps {
-            echo "Deploy"
-            echo "GKE"
+            sh "sed -i 's|image: harrisonfok/covid_tracker_location_search_api|image: harrisonfok/covid_tracker_location_search_api|g' Deployment_Files/LocationStatusAPI.deployment.yaml"
+            sh "sed -i 's|image: harrisonfok/covid_tracker_location_status_api|image: harrisonfok/covid_tracker_location_status_api|g' Deployment_Files/LocationSearchAPI.deployment.yaml"
+            step([$class: 'KubernetesEngineBuilder',
+                projectId: env.PROJECT_ID,
+                clusterName: env.CLUSTER_NAME,
+                location: env.REGISTRY_LOCATION,
+                manifestPattern: 'Deployment_Files',
+                credentialsId: env.CREDENTIALS_ID,
+                verifyDeployments: true])
         }
     }
   }
