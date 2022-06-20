@@ -111,7 +111,7 @@ pipeline {
                 projectId: env.PROJECT_ID,
                 clusterName: env.CLUSTER_NAME,
                 location: env.REGISTRY_LOCATION,
-                manifestPattern: '*.deployment.yaml',
+                manifestPattern: 'Deployment_Files',
                 credentialsId: env.CREDENTIALS_ID,
                 verifyDeployments: true])
         }
