@@ -105,8 +105,8 @@ pipeline {
 
     stage('Deploy') {
         steps {
-            sh "sed -i 's|image: harrisonfok/covid_tracker_location_search_api|image: harrisonfok/covid_tracker_location_search_api|g' LocationStatusAPI.deployment.yaml"
-            sh "sed -i 's|image: harrisonfok/covid_tracker_location_status_api|image: harrisonfok/covid_tracker_location_status_api|g' LocationSearchAPI.deployment.yaml"
+            sh "sed -i 's|image: harrisonfok/covid_tracker_location_search_api|image: harrisonfok/covid_tracker_location_search_api|g' Deployment_Files/LocationStatusAPI.deployment.yaml"
+            sh "sed -i 's|image: harrisonfok/covid_tracker_location_status_api|image: harrisonfok/covid_tracker_location_status_api|g' Deployment_Files/LocationSearchAPI.deployment.yaml"
             step([$class: 'KubernetesEngineBuilder',
                 projectId: env.PROJECT_ID,
                 clusterName: env.CLUSTER_NAME,
