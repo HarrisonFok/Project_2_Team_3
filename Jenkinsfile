@@ -53,6 +53,7 @@ pipeline {
         }
     }
 
+    /*
     stage('Docker Image') {
         when {
             branch 'master'
@@ -66,6 +67,20 @@ pipeline {
             }
         }
     }
+    */
+        stage('Docker Image') {
+            when {
+                branch 'master'
+            }
+            steps {
+                script {
+                    echo "$registry1:$currentBuild.number"
+                    echo "$registry2:$currentBuild.number"
+                    sh "docker build -t LocationSearchAPI"
+                    sh "docker build -t LocationStatusAPI"
+                }
+            }
+        }
 
     /*
     stage('Docker Deliver') {
@@ -90,8 +105,8 @@ pipeline {
         }
         steps {
             script {
-                sh "docker tag covid-tracker-artifact-registry-repository ${REGISTRY_LOCATION}-docker.pkg.dev/${PROJECT_ID}/${REPOSITORY}/covid-tracker-artifact-registry-repository"
-                sh "docker push ${REGISTRY_LOCATION}-docker.pkg.dev/${PROJECT_ID}/${REPOSITORY}/covid-tracker-artifact-registry-repository"
+                sh "docker tag LocationSearchAPI ${REGISTRY_LOCATION}-docker.pkg.dev/${PROJECT_ID}/${REPOSITORY}/LocationSearchAPI"
+                sh "docker push ${REGISTRY_LOCATION}-docker.pkg.dev/${PROJECT_ID}/${REPOSITORY}/LocationSearchAPI"
             }
             echo "Docker Deliver"
         }
