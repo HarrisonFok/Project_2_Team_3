@@ -65,6 +65,7 @@ pipeline {
         }
     }
 
+    /*
     stage('Docker Deliver') {
         when {
             branch 'master'
@@ -75,6 +76,20 @@ pipeline {
                     sh "docker push harrisonfok/covid_tracker_location_search_api"
                     sh "docker push harrisonfok/covid_tracker_location_status_api"
                 }
+            }
+            echo "Docker Deliver"
+        }
+    }
+    */
+
+    stage('Docker Deliver') {
+        when {
+            branch 'master'
+        }
+        steps {
+            script {
+                sh "docker tag covid-tracker-artifact-registry-repository ${REGISTRY_LOCATION}-docker.pkg.dev/${PROJECT_ID}/${REPOSITORY}/covid-tracker-artifact-registry-repository"
+                sh "docker push ${REGISTRY_LOCATION}-docker.pkg.dev/${PROJECT_ID}/${REPOSITORY}/covid-tracker-artifact-registry-repository"
             }
             echo "Docker Deliver"
         }
