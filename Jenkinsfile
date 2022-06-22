@@ -76,8 +76,8 @@ pipeline {
                 script {
                     echo "$registry1:$currentBuild.number"
                     echo "$registry2:$currentBuild.number"
-                    sh "docker build -t LocationSearchAPI"
-                    sh "docker build -t LocationStatusAPI"
+                    sh "docker build -t locationSearchAPI"
+                    sh "docker build -t locationStatusAPI"
                 }
             }
         }
@@ -105,8 +105,8 @@ pipeline {
         }
         steps {
             script {
-                sh "docker tag LocationSearchAPI ${REGISTRY_LOCATION}-docker.pkg.dev/${PROJECT_ID}/${REPOSITORY}/LocationSearchAPI"
-                sh "docker push ${REGISTRY_LOCATION}-docker.pkg.dev/${PROJECT_ID}/${REPOSITORY}/LocationSearchAPI"
+                sh "docker tag locationSearchAPI ${REGISTRY_LOCATION}-docker.pkg.dev/${PROJECT_ID}/${REPOSITORY}/locationSearchAPI"
+                sh "docker push ${REGISTRY_LOCATION}-docker.pkg.dev/${PROJECT_ID}/${REPOSITORY}/locationSearchAPI"
             }
             echo "Docker Deliver"
         }
