@@ -6,9 +6,7 @@ pipeline {
     dockerImage1 = ""
     dockerImage2 = ""
     scannerHome = tool 'SonarQubeScanner'
-    REGISTRY_LOCATION = 'us-central1'
-    PROJECT_ID = 'covidtracker-353422'
-    REPOSITORY = 'covid-tracker-artifact-registry-repository'
+
   }
   agent any
   stages {
@@ -53,7 +51,6 @@ pipeline {
         }
     }
 
-    /*
     stage('Docker Image') {
         when {
             branch 'master'
@@ -67,22 +64,7 @@ pipeline {
             }
         }
     }
-    */
-        stage('Docker Image') {
-            when {
-                branch 'master'
-            }
-            steps {
-                script {
-                    echo "$registry1:$currentBuild.number"
-                    echo "$registry2:$currentBuild.number"
-                    sh "docker build -t location_search_api ./LocationSearchAPI"
-                    sh "docker build -t location_status_api ./LocationStatusAPI"
-                }
-            }
-        }
 
-    /*
     stage('Docker Deliver') {
         when {
             branch 'master'
@@ -93,20 +75,6 @@ pipeline {
                     sh "docker push harrisonfok/covid_tracker_location_search_api"
                     sh "docker push harrisonfok/covid_tracker_location_status_api"
                 }
-            }
-            echo "Docker Deliver"
-        }
-    }
-    */
-
-    stage('Docker Deliver') {
-        when {
-            branch 'master'
-        }
-        steps {
-            script {
-                sh "docker tag location_search_api ${REGISTRY_LOCATION}-docker.pkg.dev/${PROJECT_ID}/${REPOSITORY}/location_search_api"
-                sh "docker push ${REGISTRY_LOCATION}-docker.pkg.dev/${PROJECT_ID}/${REPOSITORY}/location_search_api"
             }
             echo "Docker Deliver"
         }
