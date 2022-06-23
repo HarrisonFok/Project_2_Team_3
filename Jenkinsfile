@@ -59,8 +59,8 @@ pipeline {
             script {
                 echo "$registry1:$currentBuild.number"
                 echo "$registry2:$currentBuild.number"
-                sh "docker build -t $registry1 location_search_api"
-                sh "docker build -t $registry2 location_status_api"
+                sh "docker build -t location_search_api ./LocationSearchAPI"
+                sh "docker build -t location_status_api ./LocationStatusAPI"
             }
         }
     }
