@@ -6,7 +6,9 @@ pipeline {
     dockerImage1 = ""
     dockerImage2 = ""
     scannerHome = tool 'SonarQubeScanner'
-
+    REGISTRY_LOCATION = 'us-central1'
+    PROJECT_ID = 'covidtracker-353422'
+    REPOSITORY = 'covid-tracker-artifact-registry-repository'
   }
   agent any
   stages {
