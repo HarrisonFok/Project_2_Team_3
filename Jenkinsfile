@@ -59,12 +59,13 @@ pipeline {
             script {
                 echo "$registry1:$currentBuild.number"
                 echo "$registry2:$currentBuild.number"
-                sh "docker build -t $registry1 LocationSearchAPI"
-                sh "docker build -t $registry2 LocationStatusAPI"
+                sh "docker build -t $registry1 location_search_api"
+                sh "docker build -t $registry2 location_status_api"
             }
         }
     }
 
+    /*
     stage('Docker Deliver') {
         when {
             branch 'master'
@@ -75,6 +76,22 @@ pipeline {
                     sh "docker push harrisonfok/covid_tracker_location_search_api"
                     sh "docker push harrisonfok/covid_tracker_location_status_api"
                 }
+            }
+            echo "Docker Deliver"
+        }
+    }
+    */
+
+    stage('Docker Deliver') {
+        when {
+            branch 'master'
+        }
+        steps {
+            script {
+                sh "docker tag location_search_api ${REGISTRY_LOCATION}-docker.pkg.dev/${PROJECT_ID}/${REPOSITORY}/location_search_api"
+                sh "docker push ${REGISTRY_LOCATION}-docker.pkg.dev/${PROJECT_ID}/${REPOSITORY}/location_search_api"
+                sh "docker tag location_status_api ${REGISTRY_LOCATION}-docker.pkg.dev/${PROJECT_ID}/${REPOSITORY}/location_status_api"
+                sh "docker push ${REGISTRY_LOCATION}-docker.pkg.dev/${PROJECT_ID}/${REPOSITORY}/location_status_api"
             }
             echo "Docker Deliver"
         }
