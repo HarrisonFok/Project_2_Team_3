@@ -59,15 +59,14 @@ pipeline {
         }
         steps {
             script {
-                echo "$registry1:$currentBuild.number"
-                echo "$registry2:$currentBuild.number"
                 sh "docker build -t location_search_api ./LocationSearchAPI"
                 sh "docker build -t location_status_api ./LocationStatusAPI"
             }
         }
     }
 
-    /*
+    /* For pushing to Docker Hub
+
     stage('Docker Deliver') {
         when {
             branch 'master'
@@ -121,11 +120,27 @@ pipeline {
         }
     }
 
+    /* For getting the images from Docker Hub and deploying to GKE
 
     stage('Deploy') {
         steps {
             sh "sed -i 's|image: harrisonfok/covid_tracker_location_search_api|image: harrisonfok/covid_tracker_location_search_api|g' Deployment_Files/LocationStatusAPI.deployment.yaml"
             sh "sed -i 's|image: harrisonfok/covid_tracker_location_status_api|image: harrisonfok/covid_tracker_location_status_api|g' Deployment_Files/LocationSearchAPI.deployment.yaml"
+            step([$class: 'KubernetesEngineBuilder',
+                projectId: env.PROJECT_ID,
+                clusterName: env.CLUSTER_NAME,
+                location: env.REGISTRY_LOCATION,
+                manifestPattern: 'Deployment_Files',
+                credentialsId: env.CREDENTIALS_ID,
+                verifyDeployments: true])
+        }
+    }
+    */
+
+    stage('Deploy') {
+        steps {
+            sh "sed -i 's|image: harrisonfok/covid_tracker_location_search_api|image: ${REGISTRY_LOCATION}-docker.pkg.dev/${PROJECT_ID}/${REPOSITORY}/location_search_api|g' Deployment_Files/LocationStatusAPI.deployment.yaml"
+            sh "sed -i 's|image: harrisonfok/covid_tracker_location_status_api|image: ${REGISTRY_LOCATION}-docker.pkg.dev/${PROJECT_ID}/${REPOSITORY}/location_status_api|g' Deployment_Files/LocationSearchAPI.deployment.yaml"
             step([$class: 'KubernetesEngineBuilder',
                 projectId: env.PROJECT_ID,
                 clusterName: env.CLUSTER_NAME,
