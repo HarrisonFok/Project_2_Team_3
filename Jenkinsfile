@@ -65,6 +65,21 @@ pipeline {
         }
     }
 
+    stage('Docker Deliver') {
+        when {
+            branch 'master'
+        }
+        steps {
+            script {
+                sh "docker tag location_search_api ${REGISTRY_LOCATION}-docker.pkg.dev/${PROJECT_ID}/${REPOSITORY}/location_search_api"
+                sh "docker push ${REGISTRY_LOCATION}-docker.pkg.dev/${PROJECT_ID}/${REPOSITORY}/location_search_api"
+                sh "docker tag location_status_api ${REGISTRY_LOCATION}-docker.pkg.dev/${PROJECT_ID}/${REPOSITORY}/location_status_api"
+                sh "docker push ${REGISTRY_LOCATION}-docker.pkg.dev/${PROJECT_ID}/${REPOSITORY}/location_status_api"
+            }
+            echo "Docker Deliver"
+        }
+    }
+
     /* For pushing to Docker Hub
 
     stage('Docker Deliver') {
@@ -82,21 +97,6 @@ pipeline {
         }
     }
     */
-
-    stage('Docker Deliver') {
-        when {
-            branch 'master'
-        }
-        steps {
-            script {
-                sh "docker tag location_search_api ${REGISTRY_LOCATION}-docker.pkg.dev/${PROJECT_ID}/${REPOSITORY}/location_search_api"
-                sh "docker push ${REGISTRY_LOCATION}-docker.pkg.dev/${PROJECT_ID}/${REPOSITORY}/location_search_api"
-                sh "docker tag location_status_api ${REGISTRY_LOCATION}-docker.pkg.dev/${PROJECT_ID}/${REPOSITORY}/location_status_api"
-                sh "docker push ${REGISTRY_LOCATION}-docker.pkg.dev/${PROJECT_ID}/${REPOSITORY}/location_status_api"
-            }
-            echo "Docker Deliver"
-        }
-    }
 
     stage('Wait for approval') {
         when {
@@ -120,6 +120,20 @@ pipeline {
         }
     }
 
+    stage('Deploy') {
+        steps {
+            sh "sed -i 's|image: harrisonfok/covid_tracker_location_search_api|image: ${REGISTRY_LOCATION}-docker.pkg.dev/${PROJECT_ID}/${REPOSITORY}/location_search_api|g' Deployment_Files/LocationStatusAPI.deployment.yaml"
+            sh "sed -i 's|image: harrisonfok/covid_tracker_location_status_api|image: ${REGISTRY_LOCATION}-docker.pkg.dev/${PROJECT_ID}/${REPOSITORY}/location_status_api|g' Deployment_Files/LocationSearchAPI.deployment.yaml"
+            step([$class: 'KubernetesEngineBuilder',
+                projectId: env.PROJECT_ID,
+                clusterName: env.CLUSTER_NAME,
+                location: env.REGISTRY_LOCATION,
+                manifestPattern: 'Deployment_Files',
+                credentialsId: env.CREDENTIALS_ID,
+                verifyDeployments: true])
+        }
+    }
+
     /* For getting the images from Docker Hub and deploying to GKE
 
     stage('Deploy') {
@@ -136,19 +150,5 @@ pipeline {
         }
     }
     */
-
-    stage('Deploy') {
-        steps {
-            sh "sed -i 's|image: harrisonfok/covid_tracker_location_search_api|image: ${REGISTRY_LOCATION}-docker.pkg.dev/${PROJECT_ID}/${REPOSITORY}/location_search_api|g' Deployment_Files/LocationStatusAPI.deployment.yaml"
-            sh "sed -i 's|image: harrisonfok/covid_tracker_location_status_api|image: ${REGISTRY_LOCATION}-docker.pkg.dev/${PROJECT_ID}/${REPOSITORY}/location_status_api|g' Deployment_Files/LocationSearchAPI.deployment.yaml"
-            step([$class: 'KubernetesEngineBuilder',
-                projectId: env.PROJECT_ID,
-                clusterName: env.CLUSTER_NAME,
-                location: env.REGISTRY_LOCATION,
-                manifestPattern: 'Deployment_Files',
-                credentialsId: env.CREDENTIALS_ID,
-                verifyDeployments: true])
-        }
-    }
   }
 }
