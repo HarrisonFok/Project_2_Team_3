@@ -1,7 +1,5 @@
 server:
-  port: 8001
-#  servlet:
-#    context-path: /search
+  port: ${SERVER_PORT}
 
 management:
   endpoints:
