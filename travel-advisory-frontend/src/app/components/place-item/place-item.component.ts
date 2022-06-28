@@ -7,6 +7,7 @@ import { Place } from 'src/app/Place';
   styleUrls: ['./place-item.component.css']
 })
 export class PlaceItemComponent implements OnInit {
+  @Input() place: any;
 
   constructor() { }
 
