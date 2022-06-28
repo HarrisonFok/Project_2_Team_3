@@ -21,6 +21,7 @@ public class CovidApiController {
      * @param country
      * @return covid data for queried country
      */
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("search") // covid-api/search?country=nameOfCountry
     public ResponseEntity<CovidStatsDTO> getDataByCountry(@RequestParam String country){
         return ResponseEntity.ok(covidApiService.getAllDataByCountry(country).getBody());
@@ -32,6 +33,7 @@ public class CovidApiController {
      * @param country
      * @return vaccine data for queried country
      */
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("vaccine-data") // covid-api/vaccine-data?country=nameOfCountry
     public ResponseEntity<VaccineDataDTO> getVaccineDataByCountry(@RequestParam String country){
         return ResponseEntity.ok(covidApiService.getAllVaccineDataByCountry(country).getBody());

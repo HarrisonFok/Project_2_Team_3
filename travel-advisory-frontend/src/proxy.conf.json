@@ -1,6 +1,0 @@
-{
-    "/api": {
-      "target": "http://34.72.241.183:90",
-      "secure": false
-    }
-}

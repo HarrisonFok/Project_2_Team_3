@@ -28,6 +28,7 @@ public class StatusController {
      * @return if status is not saved, receives internal service error and message 'Error creating statusReport'
      * @return if status is saved, receives successfully created new statusReport message
      */
+    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping
     public ResponseEntity saveNewStatus(@RequestBody StatusReport statusReport) {
         try {
@@ -44,6 +45,7 @@ public class StatusController {
      * @param country
      * @return statusReport
      */
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/{country}")
     public ResponseEntity getStatusBasedOnLocation(@PathVariable String country) {
 

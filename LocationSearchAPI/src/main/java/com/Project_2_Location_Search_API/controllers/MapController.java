@@ -28,6 +28,7 @@ public class MapController {
      * @param format
      * @return structured response
      */
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/structured")
     public ResponseEntity structuredQuery(@RequestParam String street, @RequestParam String city, @RequestParam String county, @RequestParam String state, @RequestParam String country, @RequestParam String postalCode, @RequestParam String format) {
         return ResponseEntity.ok(mapService.getByStructured(street, city, county, state, country, postalCode, format).getBody());
@@ -40,6 +41,7 @@ public class MapController {
      * @param countrycodes
      * @return response entity, jsonArray
      */
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/state-info")
     public ResponseEntity getStateInfo(@RequestParam String state, @RequestParam String format, @RequestParam String countrycodes) {
         Object places = mapService.getStateInfo(state, format, countrycodes).getBody();
