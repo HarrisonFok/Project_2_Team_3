@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins= {"*"}, maxAge = 4800, allowCredentials = "false" )
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/map")
 public class MapController {
@@ -57,6 +57,7 @@ public class MapController {
      * @param q
      * @return general request
      */
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/landmark")
     public ResponseEntity general(@RequestParam String q) {
         return ResponseEntity.ok(mapService.getGeneral(q).getBody());
@@ -67,6 +68,7 @@ public class MapController {
      * @param location
      * @return location map, json
      */
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("{location}")
     public ResponseEntity showLocationMap(@PathVariable String location){
         return mapService.getLocationMap(location,"json");

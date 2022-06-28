@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import { SearchService } from 'src/app/services/search.service';
 
 @Component({
   selector: 'app-searchbar',
@@ -8,10 +9,10 @@ import {HttpClient} from '@angular/common/http';
 })
 export class SearchbarComponent implements OnInit {
 
-  searchPlace: string = "";
+  searchPlace: any;
   result: any;
 
-  constructor(private http : HttpClient){
+  constructor(private http : HttpClient, private searchService: SearchService){
   }
 
   ngOnInit(): void {

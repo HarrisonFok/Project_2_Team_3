@@ -1,5 +1,6 @@
 server:
-  port: ${SERVER_PORT}
+  port: 7000
+#  port: ${SERVER_PORT}
 
 management:
   endpoints:
