@@ -12,8 +12,8 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
+@CrossOrigin(origins= {"*"}, maxAge = 4800, allowCredentials = "false" )
 @RestController
-@CrossOrigin
 @RequestMapping("/search")
 public class LocationQueryController {
 

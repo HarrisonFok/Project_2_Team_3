@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 
+@CrossOrigin(origins= {"*"}, maxAge = 4800, allowCredentials = "false" )
 @RestController
-@CrossOrigin
 @RequestMapping("status")
 public class StatusController {
 
