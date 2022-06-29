@@ -24,6 +24,7 @@ Sample calls (the link might not work anymore, since I may have paused GKE alrea
   ![image](https://user-images.githubusercontent.com/28497032/176506007-d9eca2f0-a4a0-48c9-a124-5a1d341002d7.png)
 - Prometheus: http://34.125.79.181:9090/
 - Grafana: http://34.125.79.181:3000/
+- Jenkins: http://34.125.79.181:8080/
 
 Sonar Cloud:
 ![image](https://user-images.githubusercontent.com/28497032/176509646-13b4a352-7c6b-458b-9b1f-81fd3093faba.png)
