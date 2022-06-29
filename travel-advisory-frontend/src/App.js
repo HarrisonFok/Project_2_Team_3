@@ -4,7 +4,7 @@ const App = () => {
   const [isStructured, setIsStructured] = useState(false);
   const [isStateInfo, setIsStateInfo] = useState(false);
   const [isLandmark, setIsLandmark] = useState(false);
-  const [results, setResults] = useState([]);
+  const [res, setResults] = useState([]);
   const [searchItem, setSearchItem] = useState("");
 
   // useEffect(() => {
@@ -31,9 +31,8 @@ const App = () => {
     }
     let results = await fetch(fetchStr)
     setResults(await results.json())
-    console.log(results)
-    // let map = await fetch(`http://localhost:7000/map/${searchItem}`)
-    // console.log(map)
+    let map = await fetch(`http://localhost:7000/map/${searchItem}`)
+    //console.log(map)
   }
 
   const changeFilter = (filter) => {
@@ -58,7 +57,7 @@ const App = () => {
 
   return (
     <div className="App">
-      <button onClick={(e) => changeFilter("structured")}>By Structured</button>
+      {/* <button onClick={(e) => changeFilter("structured")}>By Structured</button> */}
       <button onClick={(e) => changeFilter("state-info")}>By State Info</button>
       <button onClick={(e) => changeFilter("landmark")}>By Landmark</button>
 
@@ -67,7 +66,7 @@ const App = () => {
         <button>Search</button>
       </form>
       
-      {results ? results.map(res => <p key={Math.random() * 10000}>{res.display_name}</p>) : ""}
+      {Array.isArray(res) ? res.map(res => <p key={Math.random() * 10000}>{res.display_name}</p>) : typeof res === "object" ? res.display_name : ""}
     </div>
   );
 }

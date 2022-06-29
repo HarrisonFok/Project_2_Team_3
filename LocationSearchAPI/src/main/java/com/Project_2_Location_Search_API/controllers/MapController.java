@@ -70,7 +70,7 @@ public class MapController {
      * @param location
      * @return location map, json
      */
-    @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin
     @GetMapping("{location}")
     public ResponseEntity showLocationMap(@PathVariable String location){
         return mapService.getLocationMap(location,"json");
