@@ -19,7 +19,7 @@ Sample calls (the link might not work anymore, since I may have paused GKE alrea
 - http://34.72.241.183:90/map/structured?street=20 W 34th St&city=New York&county=New York County&state=New York&country=United States of America&postalCode=10001&format=json
 - http://34.72.241.183:90/map/state-info?state=Texas&format=json&countrycodes=us
 - http://34.72.241.183:90/map/landmark?q=Canada
-- http://34.72.241.183:90/map/Taiwan
+- http://34.72.241.183:90/map/taiwan
   - This will return a map image
   ![image](https://user-images.githubusercontent.com/28497032/176506007-d9eca2f0-a4a0-48c9-a124-5a1d341002d7.png)
 - Prometheus: http://34.125.79.181:9090/
