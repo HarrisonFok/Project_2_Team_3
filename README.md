@@ -29,3 +29,10 @@ Sample calls (the link might not work anymore, since I may have paused GKE alrea
 Sonar Cloud:
 ![image](https://user-images.githubusercontent.com/28497032/176509646-13b4a352-7c6b-458b-9b1f-81fd3093faba.png)
 - https://sonarcloud.io/project/overview?id=com.Group_3%3AProject_2
+
+Google Cloud Platform:
+![image](https://user-images.githubusercontent.com/28497032/176734168-9ee44c35-855f-45a0-92d8-4578fb2502e1.png)
+![image](https://user-images.githubusercontent.com/28497032/176734238-b8c722ba-cc5b-446a-b109-4e48983a29d8.png)
+![image](https://user-images.githubusercontent.com/28497032/176734317-9990a8ed-104e-439a-8226-e0a1f10af3f3.png)
+
+
