@@ -17,11 +17,13 @@ API 2:
 
 Sample calls (the link might not work anymore, since I may have paused GKE already): 
 - http://34.72.241.183:90/map/structured?street=20 W 34th St&city=New York&county=New York County&state=New York&country=United States of America&postalCode=10001&format=json
+  ![image](https://user-images.githubusercontent.com/28497032/177632591-104c08b3-7f21-4c45-91f6-1dbb068965fa.png)
 - http://34.72.241.183:90/map/state-info?state=Texas&format=json&countrycodes=us
+  ![image](https://user-images.githubusercontent.com/28497032/177632652-d7302593-5b87-4de6-888c-8366a4760063.png)
 - http://34.72.241.183:90/map/landmark?q=Canada
+  ![image](https://user-images.githubusercontent.com/28497032/177632721-af8ad16b-1e9f-4c64-a377-f7ccb2880ce4.png)
 - http://34.72.241.183:90/map/taiwan
-  - This will return a map image
-  ![image](https://user-images.githubusercontent.com/28497032/176506007-d9eca2f0-a4a0-48c9-a124-5a1d341002d7.png)
+  ![image](https://user-images.githubusercontent.com/28497032/177632860-0f634fed-8aaa-4a5d-997a-c767c3f4338e.png)
 - Prometheus: http://34.125.79.181:9090/
 - Grafana: http://34.125.79.181:3000/
 - Jenkins: http://34.125.79.181:8080/
